@@ -1,0 +1,30 @@
+[debug] [2020-09-14T11:03:20.263Z] ----------------------------------------------------------------------
+[debug] [2020-09-14T11:03:20.264Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\TOM\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting:pndcoding-covid-19
+[debug] [2020-09-14T11:03:20.264Z] CLI Version:   8.10.0
+[debug] [2020-09-14T11:03:20.264Z] Platform:      win32
+[debug] [2020-09-14T11:03:20.265Z] Node Version:  v12.18.3
+[debug] [2020-09-14T11:03:20.265Z] Time:          Mon Sep 14 2020 18:03:20 GMT+0700 (Indochina Time)
+[debug] [2020-09-14T11:03:20.265Z] ----------------------------------------------------------------------
+[debug] [2020-09-14T11:03:20.265Z] 
+[debug] [2020-09-14T11:03:20.271Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-14T11:03:20.271Z] > authorizing via signed-in user
+[debug] [2020-09-14T11:03:20.272Z] [iam] checking project covid-19-tracker-d2906 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-09-14T11:03:20.274Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/covid-19-tracker-d2906:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-09-14T11:03:21.372Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 14 Sep 2020 11:03:23 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=991","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-14T11:03:21.374Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/covid-19-tracker-d2906  
+ 
+[debug] [2020-09-14T11:03:21.680Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 14 Sep 2020 11:03:23 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Deploying to 'covid-19-tracker-d2906'...
+[info] 
+[info] i  deploying hosting 
+[info] 
+[info] +  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/covid-19-tracker-d2906/overview
+[debug] [2020-09-14T11:03:21.820Z] TypeError: Cannot read property 'deploys' of undefined
+    at C:\Users\TOM\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:84:36
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[error] 
+[error] Error: An unexpected error has occurred.
