@@ -69,23 +69,3 @@ export const showDataOnMap = (data, casesType = "cases") =>
       </Popup>
     </Circle>
   ));
-
-export const languageChange = (change = "EN") => {
-  let lang = {};
-
-  if (change == "EN") {
-    lang = {
-      InfoBox1: 'Coronavirus Cases',
-      InfoBox2: 'Recovered',
-      InfoBox3: 'Deaths',
-    }
-
-  } else if (change == "TH") {
-    lang = {
-      InfoBox1: 'ผู้ติดเชื้อรวม',
-      InfoBox2: 'หายแล้ว',
-      InfoBox3: 'ผู้เสียชีวิต',
-    }
-  }
-  return lang;
-};
