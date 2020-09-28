@@ -14,9 +14,11 @@ import { sortData, prettyPrintStat } from "./util";
 import numeral from "numeral";
 import Map from "./Map";
 import "leaflet/dist/leaflet.css";
+import displayLanguage from './language/index';
 
 const App = () => {
   const [country, setInputCountry] = useState("worldwide");
+  const [language, setLanguage] = useState(0);
   const [countryInfo, setCountryInfo] = useState({});
   const [countries, setCountries] = useState([]);
   const [mapCountries, setMapCountries] = useState([]);
@@ -30,6 +32,7 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data);
+        console.log('displayLanguage', displayLanguage);
       });
   }, []);
 
@@ -52,8 +55,6 @@ const App = () => {
     getCountriesData();
   }, []);
 
-  console.log(casesType);
-
   const onCountryChange = async (e) => {
     const countryCode = e.target.value;
 
@@ -71,11 +72,18 @@ const App = () => {
       });
   };
 
+  const onLanguageChange = async (e) => {
+    setLanguage(displayLanguage[language].key == "th" ? 1 : 0);
+  }
+
   return (
     <div className="app">
       <div className="app__left">
         <div className="app__header">
-          <h1>COVID-19 Tracker</h1>
+          <h1>{displayLanguage[language].head}</h1>
+          <div>
+            <img src={displayLanguage[language].image} width="30" height="16" onClick={onLanguageChange} />
+          </div>
           <FormControl className="app__dropdown">
             <Select
               variant="outlined"
@@ -92,26 +100,29 @@ const App = () => {
         <div className="app__stats">
           <InfoBox
             onClick={(e) => setCasesType("cases")}
-            title="Coronavirus Cases"
+            title={displayLanguage[language].menuTitle[0].tltle1}
             isRed
             active={casesType === "cases"}
             cases={prettyPrintStat(countryInfo.todayCases)}
             total={numeral(countryInfo.cases).format("0.0a")}
+            displayLanguage={displayLanguage[language]}
           />
           <InfoBox
             onClick={(e) => setCasesType("recovered")}
-            title="Recovered"
+            title={displayLanguage[language].menuTitle[1].tltle2}
             active={casesType === "recovered"}
             cases={prettyPrintStat(countryInfo.todayRecovered)}
             total={numeral(countryInfo.recovered).format("0.0a")}
+            displayLanguage={displayLanguage[language]}
           />
           <InfoBox
             onClick={(e) => setCasesType("deaths")}
-            title="Deaths"
+            title={displayLanguage[language].menuTitle[2].tltle3}
             isRed
             active={casesType === "deaths"}
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={numeral(countryInfo.deaths).format("0.0a")}
+            displayLanguage={displayLanguage[language]}
           />
         </div>
         <Map
