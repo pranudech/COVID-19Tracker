@@ -1,15 +1,11 @@
 import React from "react";
 import { Card, CardContent, Typography } from "@material-ui/core";
+import numeral from "numeral";
 import "./InfoBox.css";
 
 function InfoBox({ title, cases, total, active, isRed, displayLanguage, ...props }) {
   return (
-    <Card
-      onClick={props.onClick}
-      className={`infoBox ${active && "infoBox--selected"} ${
-        isRed && "infoBox--red"
-      }`}
-    >
+    <Card onClick={props.onClick} className={`infoBox ${active && "infoBox--selected"} ${isRed && "infoBox--red"}`}>
       <CardContent>
         <Typography color="textSecondary" gutterBottom>
           {title}
@@ -19,7 +15,7 @@ function InfoBox({ title, cases, total, active, isRed, displayLanguage, ...props
         </h2>
 
         <Typography className="infoBox__total" color="textSecondary">
-        {displayLanguage.total} {total}
+          {displayLanguage.total} {numeral(total).format('0.0a')} {total}
         </Typography>
       </CardContent>
     </Card>

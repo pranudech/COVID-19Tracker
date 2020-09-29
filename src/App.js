@@ -10,7 +10,7 @@ import {
 import InfoBox from "./InfoBox";
 import LineGraph from "./LineGraph";
 import Table from "./Table";
-import { sortData, prettyPrintStat } from "./util";
+import { sortData, prettyPrintStat, date2str } from "./util";
 import numeral from "numeral";
 import Map from "./Map";
 import "leaflet/dist/leaflet.css";
@@ -81,8 +81,8 @@ const App = () => {
       <div className="app__left">
         <div className="app__header">
           <h1>{displayLanguage[language].head}</h1>
-          <div>
-            <img src={displayLanguage[language].image} width="30" height="16" onClick={onLanguageChange} />
+          <div className="app__language">
+            <img src={displayLanguage[language].image} onClick={onLanguageChange} />
           </div>
           <FormControl className="app__dropdown">
             <Select
@@ -96,6 +96,12 @@ const App = () => {
               ))}
             </Select>
           </FormControl>
+        </div>
+        <div className="app__timeUpdate">
+          <label style={{ marginBottom: 20 }}>
+            {displayLanguage[language].timeDisplay.text1}
+            {date2str(new Date(countryInfo.updated), displayLanguage[language].timeDisplay.text2, displayLanguage[language].key)}
+          </label>
         </div>
         <div className="app__stats">
           <InfoBox
@@ -135,7 +141,7 @@ const App = () => {
       <Card className="app__right">
         <CardContent>
           <div className="app__information">
-            <h3>Live Cases by Country</h3>
+            <h3>{displayLanguage[language].information}</h3>
             <Table countries={tableData} />
             <h3>Worldwide new {casesType}</h3>
             <LineGraph casesType={casesType} />
