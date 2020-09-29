@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
+import Skeleton from '@material-ui/lab/Skeleton';
 import InfoBox from "./InfoBox";
 import LineGraph from "./LineGraph";
 import Table from "./Table";
@@ -18,21 +19,23 @@ import displayLanguage from './language/index';
 
 const App = () => {
   const [country, setInputCountry] = useState("worldwide");
-  const [language, setLanguage] = useState(0);
+  const [language, setLanguage] = useState(1);
   const [countryInfo, setCountryInfo] = useState({});
   const [countries, setCountries] = useState([]);
   const [mapCountries, setMapCountries] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [casesType, setCasesType] = useState("cases");
-  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
-  const [mapZoom, setMapZoom] = useState(3);
+  const [mapCenter, setMapCenter] = useState({ lat: 13.4853773, lng: 20.3800329 });
+  const [mapZoom, setMapZoom] = useState(2);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     fetch("https://disease.sh/v3/covid-19/all")
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data);
-        console.log('displayLanguage', displayLanguage);
+        setLoading(false)
       });
   }, []);
 
@@ -73,7 +76,15 @@ const App = () => {
   };
 
   const onLanguageChange = async (e) => {
-    setLanguage(displayLanguage[language].key == "th" ? 1 : 0);
+    if (displayLanguage[language].key == "th") {
+      setLanguage(1);
+      setMapCenter({ lat: 13.485377, lng: 102.284564 });
+      setMapZoom(5);
+    } else {
+      setLanguage(0);
+      setMapCenter({ lat: 13.485377, lng: 20.380032 });
+      setMapZoom(2);
+    }
   }
 
   return (
@@ -97,22 +108,19 @@ const App = () => {
             </Select>
           </FormControl>
         </div>
-        <div className="app__timeUpdate">
-          <label style={{ marginBottom: 20 }}>
-            {displayLanguage[language].timeDisplay.text1}
-            {date2str(new Date(countryInfo.updated), displayLanguage[language].timeDisplay.text2, displayLanguage[language].key)}
-          </label>
-        </div>
         <div className="app__stats">
-          <InfoBox
-            onClick={(e) => setCasesType("cases")}
-            title={displayLanguage[language].menuTitle[0].tltle1}
-            isRed
-            active={casesType === "cases"}
-            cases={prettyPrintStat(countryInfo.todayCases)}
-            total={numeral(countryInfo.cases).format("0.0a")}
-            displayLanguage={displayLanguage[language]}
-          />
+          {loading ?
+            <Skeleton variant="rect" width={362} height={155} />
+            :
+            <InfoBox
+              onClick={(e) => setCasesType("cases")}
+              title={displayLanguage[language].menuTitle[0].tltle1}
+              isRed
+              active={casesType === "cases"}
+              cases={prettyPrintStat(countryInfo.todayCases)}
+              total={numeral(countryInfo.cases).format("0.0a")}
+              displayLanguage={displayLanguage[language]}
+            />}
           <InfoBox
             onClick={(e) => setCasesType("recovered")}
             title={displayLanguage[language].menuTitle[1].tltle2}
@@ -137,6 +145,12 @@ const App = () => {
           center={mapCenter}
           zoom={mapZoom}
         />
+        <div className="app__timeUpdate">
+          <label style={{ marginBottom: 20 }}>
+            {displayLanguage[language].timeDisplay.text1}
+            {date2str(new Date(countryInfo.updated), displayLanguage[language].timeDisplay.text2, displayLanguage[language].key)}
+          </label>
+        </div>
       </div>
       <Card className="app__right">
         <CardContent>

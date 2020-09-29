@@ -13,9 +13,8 @@ function InfoBox({ title, cases, total, active, isRed, displayLanguage, ...props
         <h2 className={`infoBox__cases ${!isRed && "infoBox__cases--green"}`}>
           {cases}
         </h2>
-
         <Typography className="infoBox__total" color="textSecondary">
-          {displayLanguage.total} {numeral(total).format('0.0a')} {total}
+          {displayLanguage.total} {numeral(total).format('0.0a')}
         </Typography>
       </CardContent>
     </Card>

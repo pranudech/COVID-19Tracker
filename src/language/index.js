@@ -20,7 +20,7 @@ module.exports = [
                 tltle3: 'ผู้เสียชีวิต',
             },
         ],
-        information : 'คดีสดตามประเทศ'
+        information : 'แยกตามประเทศ'
     },
     {
         key: 'en',
@@ -29,7 +29,7 @@ module.exports = [
         image: 'image/enFlag.png',
         total: 'Total',
         timeDisplay: {
-            text1: 'update...  ',
+            text1: 'last update...  ',
             text2: 'yyyy/MM/dd hh:mm:ss'
         },
         menuTitle: [
