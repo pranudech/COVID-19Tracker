@@ -54,7 +54,6 @@ const App = () => {
           setTableData(sortedData);
         });
     };
-
     getCountriesData();
   }, []);
 
